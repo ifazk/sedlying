@@ -1,0 +1,7 @@
+# Dune
+_build/
+*.merlin
+*.install
+
+# OPAM dir
+_opam/

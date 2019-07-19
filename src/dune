@@ -1,0 +1,5 @@
+(library
+ (name sedlying)
+ (public_name sedlying)
+ (libraries uutf gen bitv)
+)
