@@ -1,0 +1,5 @@
+(test
+ (name      test)
+ (libraries uutf uuseg gen uugen sedlex sedlying)
+ (preprocess (pps sedlex.ppx))
+)
