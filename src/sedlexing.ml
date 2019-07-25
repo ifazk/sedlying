@@ -57,12 +57,13 @@ let empty_lexbuf = {
 
 let chunk_size = 512
 
-let create gen = {
+let create ?(filename="") gen = {
   empty_lexbuf with
     gen;
     buf = Array.make chunk_size (Uchar.of_int 0);
     bounds = Bitv.create chunk_size false;
     curr_line = 1;
+    filename;
 }
 
 let shift_left lexbuf =
@@ -221,7 +222,7 @@ let lexeme_cp lexbuf =
 let lexeme_cp_segments lexbuf =
   let rev_segment : Uchar.t list ref = ref [] in
   let rev_segments : (Uchar.t array) list ref = ref [] in
-  for i = lexbuf.start_pos to (lexbuf.pos - lexbuf.start_pos) do
+  for i = lexbuf.start_pos to (lexbuf.pos - 1) do
     let ch = Array.get lexbuf.buf i in
     let is_last = Bitv.get lexbuf.bounds i in
     rev_segment := ch :: !rev_segment;
@@ -239,7 +240,7 @@ let lexeme_cp_segments_arr lexbuf =
 
 let lexeme_utf_8 lexbuf =
   let bytes = Buffer.create 42 in
-  for i = lexbuf.start_pos to (lexbuf.pos - lexbuf.start_pos) do
+  for i = lexbuf.start_pos to (lexbuf.pos - 1) do
     let ch = Array.get lexbuf.buf i in
     Uutf.Buffer.add_utf_8 bytes ch
   done;

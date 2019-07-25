@@ -6,10 +6,13 @@ type lybuf
 
 (** {1 Creating a lexer buffer} *)
 
-val create : [`LastUchar of Uchar.t | `Uchar of Uchar.t] Gen.t -> lybuf
-(** [create gen] creates a lexer buffer. When the lexer needs characters, it
-   will call [gen] for more characters. If the generator returns [`LastUchar c]
-   it means that the code point [c] is a final code point before a boundary. *)
+val create :
+  ?filename:string -> [`LastUchar of Uchar.t | `Uchar of Uchar.t] Gen.t -> lybuf
+(** [create ?filename gen] creates a lexer buffer, with the optionally provided
+   [filename] used for outputing lexing positions. When the lexer needs
+   characters, it will call [gen] for more characters. If the generator returns
+   [`LastUchar c] it means that the code point [c] is a final code point before
+   a boundary. *)
 
 (** {1 Interface for lexer semantic actions} *)
 
