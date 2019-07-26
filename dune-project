@@ -14,7 +14,7 @@
  (synopsis "Sedlex buffers for marking at boundary codepoints")
  (description "Sedlex buffers which ignore mark requests at non-boundary codepoints")
  (depends
-  (dune (and :build (> 1.10)))
+  (dune (and :build (>= 1.10)))
   uutf
   bitv
   (sedlex (and :with_test (> 2.0) (< 2.2)))
